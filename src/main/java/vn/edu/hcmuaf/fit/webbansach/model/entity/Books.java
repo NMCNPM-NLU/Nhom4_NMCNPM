@@ -9,7 +9,7 @@ import java.util.Set;
 
 // Books.java
 @Entity
-@Table(name = "Books")
+@Table(name = "books")
 public class Books {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +28,13 @@ public class Books {
 
     @ManyToMany
     @JoinTable(
-            name = "Book_Categories",          // đúng DDL
+            name = "book_categories",          // đúng DDL
             joinColumns = @JoinColumn(
-                    name = "bookId",      // cột trong Book_Categories
+                    name = "bookId",      // cột trong book_categories
                     referencedColumnName = "id"         // cột PK của Books
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "categoryId",  // cột trong Book_Categories
+                    name = "categoryId",  // cột trong book_categories
                     referencedColumnName = "id"         // cột PK của Categories
             )
     )
