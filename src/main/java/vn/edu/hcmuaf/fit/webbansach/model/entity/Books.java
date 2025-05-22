@@ -28,14 +28,16 @@ public class Books {
 
     @ManyToMany
     @JoinTable(
-            name = "book_Categories",          // đúng DDL
+
+            name = "book_categories",
+
             joinColumns = @JoinColumn(
-                    name = "bookId",      // cột trong Book_Categories
-                    referencedColumnName = "id"         // cột PK của Books
+                    name = "bookId",
+                    referencedColumnName = "id"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "categoryId",  // cột trong Book_Categories
-                    referencedColumnName = "id"         // cột PK của Categories
+                    name = "categoryId",
+                    referencedColumnName = "id"
             )
     )
     private Set<Categories> categories = new HashSet<>();
