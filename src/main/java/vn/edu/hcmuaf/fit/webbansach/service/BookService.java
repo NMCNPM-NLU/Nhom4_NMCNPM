@@ -10,6 +10,7 @@ import vn.edu.hcmuaf.fit.webbansach.repository.BookRepository;
 import vn.edu.hcmuaf.fit.webbansach.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 // BookService.java
 @Service
@@ -17,7 +18,8 @@ public class BookService {
     @Autowired
     private BookRepository bookRepo;
     @Autowired private CategoryRepository categoryRepo;
-
+    @Autowired
+    private BookRepository bookRepository;
     @Transactional
     public Books createBook(BookDto dto) {
         Books book = new Books();
@@ -54,4 +56,28 @@ public class BookService {
         return bookRepo.save(savedBook);
     }
 
+
+    public List<BookDto> searchBooks(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            throw new IllegalArgumentException("Search query cannot be empty.");
+        }
+
+        List<Books> books = bookRepository.searchBooks(query);
+        return books.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private BookDto convertToDto(Books book) {
+        BookDto dto = new BookDto();
+        dto.setTitle(book.getTitle());
+        dto.setAuthor(book.getAuthor());
+        dto.setDescription(book.getDescription());
+        dto.setPrice(book.getPrice());
+        dto.setStockQty(book.getStockQty());
+        dto.setPublishedDate(book.getPublishedDate());
+        dto.setImageUrl(book.getImageUrl());
+        dto.setCategoryIds(book.getCategories().stream()
+                .map(category -> category.getId())
+                .collect(Collectors.toList()));
+        return dto;
+    }
 }
