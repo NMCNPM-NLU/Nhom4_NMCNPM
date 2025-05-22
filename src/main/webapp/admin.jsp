@@ -456,18 +456,17 @@
                 <input type="date"/>
             </div>
             <div class="btn-containerAdd">
-                <button type="submit" onclick="showAddProductForm()" id="btn-addProduct">
-                    <span class="material-icons-sharp"> add </span>
+<%--            13.1.1.0 Admin chọn button “Thêm sách mới”--%>
+<%--            13.1.1.1 Hiển thị form nhập thông tin--%>
+                <button type="button" onclick="showAddProductForm()" id="btn-addProduct">
+                    <span class="material-icons-sharp">add</span>
                     <h3>Thêm sản phẩm</h3>
-                </button>
-                <button type="submit" onclick="showAddProductDetailsForm()" id="btn-addProductDetails">
-                    <span class="material-icons-sharp"> add </span>
-                    <h3>Thêm chi tiết sản phẩm</h3>
                 </button>
             </div>
         </div>
 
         <section class="overlay-addProduct">
+<%--         13.1.1.2 Nhập thông tin rồi nhấn lưu--%>
             <form id="add-product-form" onsubmit="createBook(event)">
                 <div class="form-group">
                     <div class="form-group--items">
