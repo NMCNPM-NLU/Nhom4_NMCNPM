@@ -10,18 +10,6 @@ import java.util.List;
 // BookDto.java
 public class BookDto {
 
-
-//    13.1.1.5
-//    @NotBlank(message = "Tiêu đề không được để trống")
-//    @NotBlank(message = "Giá không được để trống")
-//    @DecimalMin(value = "0.0", inclusive = false, message = "Giá phải lớn hơn 0")
-//    @Min(value = 0, message = "Số lượng tồn kho phải >= 0")
-//    @PastOrPresent(message = "Ngày xuất bản phải là ngày trong quá khứ hoặc hôm nay")
-//    @JsonFormat(pattern = "yyyy-MM-dd")
-//    @NotNull(message = "Danh mục không được để trống")
-//    @Size(min = 1, message = "Phải chọn ít nhất một danh mục")
-
-
     @NotBlank(message = "Tiêu đề không được để trống")
     private String title;
 

@@ -48,92 +48,90 @@ function fetchProducts() {
 
 ---------------------------------------------------------
 ----------------------------------------------------------*/
+// ===== Form Hiển thị / Ẩn =====
+const overlay = document.querySelector(".overlay-addProduct");
+const form = document.getElementById("add-product-form");
 
-// Hiển thị form thêm người dùng
+// 13.1.1.0 Admin chọn “Thêm sách mới”
+// 13.1.1.1 Hiển thị form nhập thông tin
 function showAddProductForm() {
-    const overlay = document.querySelector(".overlay-addProduct");
-    overlay.style.display = "flex"; // Hiển thị lớp phủ
+    overlay.style.display = "flex";
 }
 
-
 function hideAddProductForm() {
-    const overlay = document.querySelector(".overlay-addProduct");
-    const form = document.getElementById("add-product-form");
-    form.reset(); // Xóa dữ liệu trong form
+    form.reset();
     overlay.style.display = "none";
 }
 
+// ===== Lấy dữ liệu từ form =====
+function getFormData() {
+    const formData = new FormData(form);
+    return {
+        title: formData.get("title"),
+        author: formData.get("author"),
+        description: formData.get("description"),
+        publishedDate: formData.get("publishedDate"),
+        price: parseFloat(formData.get("price")),
+        stockQty: parseInt(formData.get("stockQty")),
+        imageUrl: formData.get("imageUrl"),
+        categoryIds: Array.from(
+            form.querySelector("#categoryIds").selectedOptions,
+            opt => parseInt(opt.value)
+        )
+    };
+}
 
+// 13.1.1.2 Nhập thông tin rồi nhấn lưu
 async function createBook(event) {
     event.preventDefault();
-
-    const form = document.getElementById('add-product-form');
-    const formData = new FormData(form);
-
-    const data = {
-        title: formData.get('title'),
-        author: formData.get('author'),
-        description: formData.get('description'),
-        publishedDate: formData.get('publishedDate'),
-        price: parseFloat(formData.get('price')),
-        stockQty: parseInt(formData.get('stockQty')),
-        imageUrl: formData.get('imageUrl'),
-        categoryIds: Array.from(form.querySelector('#categoryIds').selectedOptions, o => parseInt(o.value))
-    };
-
-    console.log('Gửi lên server:', JSON.stringify(data));
+    const data = getFormData();
 
     try {
-        // 13.1.1.3 Gửi HTTP POST đến request /api/books
-        const resp = await fetch('/WebBanSach/api/books', {
-            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+        // 13.1.1.3 Gửi HTTP POST đến request /WebBanSach/api/books
+        const response = await fetch("/WebBanSach/api/books", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
         });
 
-        if (!resp.ok) {
-            let errJson;
-            try {
-                errJson = await resp.json(); // Thử parse JSON
-            } catch {
-                // Trường hợp response không phải JSON (ví dụ: lỗi 500)
-                // 13.1.2.3
-                // const text = await resp.text();
-                // throw new Error(`Server error: ${resp.status} - ${text}`);
-                const text = await resp.text();
-                throw new Error(`Server error: ${resp.status} - ${text}`);
-            }
-
-            // Xử lý error object từ server (ghép các message)
-            const errorMessage = Object.entries(errJson)
-                .map(([field, msg]) => `• ${field}: ${msg}`)
-                .join('\n');
-
-            // 13.1.2.8 throw new Error(errorMessage || 'Lỗi không xác định');
-            throw new Error(errorMessage || 'Lỗi không xác định');
+        if (!response.ok) {
+            const errorMsg = await parseErrorResponse(response);
+            throw new Error(errorMsg);
         }
 
-        // Ở đây chắc chắn server trả đúng JSON { id: ... }
-        const result = await resp.json();
-        // 13.1.1.12  alert(`Thêm sách thành công! ID = ${result.id}`)
-        alert(`Thêm sách thành công! ID = ${result.id}`);
+        const result = await response.json();
+        alert(`✅ Thêm sách thành công! ID = ${result.id}`);
         form.reset();
-    } catch (e) {
-        console.error(e);
-        // 13.1.2.12  alert(`Có lỗi khi thêm sách:\n` + e.message)
-        alert('Có lỗi khi thêm sách:\n' + e.message);
+        hideAddProductForm();
+
+    } catch (err) {
+        console.error("❌ Lỗi thêm sách:", err);
+        alert("Có lỗi xảy ra:\n" + err.message);
     }
 }
 
-
-window.addEventListener("DOMContentLoaded", hideAddProductForm);
-
-// Xử lý sự kiện click ra ngoài form để ẩn form
-document.addEventListener("click", function (event) {
-    const overlay = document.querySelector(".overlay-addProduct");
-    const form = document.getElementById("add-product-form");
-
-    // Kiểm tra nếu form đang hiển thị và click không nằm trong form hoặc nút hiển thị form
-    if (overlay.style.display === "flex" && !form.contains(event.target) && !event.target.closest("button")) {
-        hideAddProductForm();
+// ===== Xử lý lỗi từ server =====
+async function parseErrorResponse(response) {
+    try {
+        const errJson = await response.json();
+        return Object.entries(errJson)
+            .map(([field, msg]) => `• ${field}: ${msg}`)
+            .join("\n");
+    } catch {
+        const text = await response.text();
+        return `Lỗi ${response.status}: ${text}`;
     }
+}
+
+// ===== DOM Ready =====
+document.addEventListener("DOMContentLoaded", () => {
+    hideAddProductForm();
+
+    document.addEventListener("click", (e) => {
+        const clickOutside = !form.contains(e.target) && !e.target.closest("button");
+        if (overlay.style.display === "flex" && clickOutside) {
+            hideAddProductForm();
+        }
+    });
 });
 

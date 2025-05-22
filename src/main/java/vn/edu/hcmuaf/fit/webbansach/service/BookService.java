@@ -1,8 +1,8 @@
 package vn.edu.hcmuaf.fit.webbansach.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.edu.hcmuaf.fit.webbansach.controller.DuplicateBookException;
 import vn.edu.hcmuaf.fit.webbansach.model.dto.BookDto;
 import vn.edu.hcmuaf.fit.webbansach.model.entity.Books;
 import vn.edu.hcmuaf.fit.webbansach.model.entity.Categories;
@@ -10,16 +10,25 @@ import vn.edu.hcmuaf.fit.webbansach.repository.BookRepository;
 import vn.edu.hcmuaf.fit.webbansach.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-// BookService.java
 @Service
 public class BookService {
-    @Autowired
-    private BookRepository bookRepo;
-    @Autowired private CategoryRepository categoryRepo;
+
+    private final BookRepository bookRepo;
+    private final CategoryRepository categoryRepo;
+
+    public BookService(BookRepository bookRepo, CategoryRepository categoryRepo) {
+        this.bookRepo = bookRepo;
+        this.categoryRepo = categoryRepo;
+    }
 
     @Transactional
     public Books createBook(BookDto dto) {
+        if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
+            throw new DuplicateBookException("BOOK_DUPLICATE", "Sách với tiêu đề và tác giả này đã tồn tại");
+        }
+
         Books book = new Books();
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
@@ -28,30 +37,17 @@ public class BookService {
         book.setStockQty(dto.getStockQty());
         book.setPublishedDate(dto.getPublishedDate());
         book.setImageUrl(
-                dto.getImageUrl() != null && !dto.getImageUrl().isBlank()
-                        ? dto.getImageUrl()
-                        : "/images/books/default.jpg"
+                Optional.ofNullable(dto.getImageUrl())
+                        .filter(u -> !u.isBlank())
+                        .orElse("/images/books/default.jpg")
         );
 
-        // 1. Kiểm tra sách đã tồn tại chưa
-        //13.1.1.7 Gọi existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())
-        if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
-            //13.1.2.10 IllegalArgumentException:("Sách với tiêu đều này đã tồn tại")
-            throw new IllegalArgumentException("Sách với tiêu đề và tác giả này đã tồn tại");
-        }
-
-        // 1. Lưu sách trước để sinh id
-        Books savedBook = bookRepo.save(book);
-
-        // 2. Lấy category theo id
+        // gán categories
         List<Categories> cats = categoryRepo.findAllById(dto.getCategoryIds());
+        book.getCategories().addAll(cats);
 
-        // 3. Gán lại category
-        savedBook.getCategories().addAll(cats);
-
-        // 4. Lưu lại lần nữa để cập nhật mối quan hệ N-N
-        //13.1.1.8  Gọi JpaRepository bookRepo.save(savedBook)
-        return bookRepo.save(savedBook);
+        Books saved = bookRepo.save(book);
+        return saved;
     }
-
 }
+
