@@ -63,8 +63,8 @@ function hideAddProductForm() {
     overlay.style.display = "none";
 }
 
-// ===== Lấy dữ liệu từ form =====
-function getFormData() {
+// 13.1.1.3 adminPage: JS thu thập dữ liệu từ form thành JSON.
+    function getFormData() {
     const formData = new FormData(form);
     return {
         title: formData.get("title"),
@@ -81,13 +81,12 @@ function getFormData() {
     };
 }
 
-// 13.1.1.2 Nhập thông tin rồi nhấn lưu
 async function createBook(event) {
     event.preventDefault();
     const data = getFormData();
 
     try {
-        // 13.1.1.3 Gửi HTTP POST đến request /WebBanSach/api/books
+        // 13.1.1.4 adminPage: JS gửi HTTP POST   BookController.
         const response = await fetch("/WebBanSach/api/books", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -99,6 +98,7 @@ async function createBook(event) {
             throw new Error(errorMsg);
         }
 
+        // 13.1.1.13 adminPage hiển thị thông báo thêm sách thành công, sau đó reset form và ẩn form
         const result = await response.json();
         alert(`✅ Thêm sách thành công! ID = ${result.id}`);
         form.reset();

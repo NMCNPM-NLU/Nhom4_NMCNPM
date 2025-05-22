@@ -20,10 +20,12 @@ import java.util.stream.Collectors;
 public class BookController {
 
     private final BookService bookService;
-
+    // 13.1.1.5 BookController nhận dữ liệu JSON từ adminPage, ánh xạ vào DTO, và kiểm tra ràng buộc.
     @PostMapping
     public ResponseEntity<Map<String, Object>> addBook(@Valid @RequestBody BookDto dto) {
+        // 13.1.1.6 BookController gọi BookService xử lý nghiệp vụ
         Books saved = bookService.createBook(dto);
+        // 13.1.1.12 BookController trả về HTTP 201 cùng JSON { "id": savedId } khi thêm sách thành công
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Map.of("id", saved.getId()));
     }

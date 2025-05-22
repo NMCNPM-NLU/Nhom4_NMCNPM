@@ -259,186 +259,186 @@
 ---------------------------------------------------------
 ---------------------------------------------------------->
 
-<%--    <main id="admin/manager-users">--%>
-<%--        <h1>Quản lý người dùng</h1>--%>
+    <main id="admin/manager-users">
+        <h1>Quản lý người dùng</h1>
 
-<%--        <div class="dash-top">--%>
-<%--            <div class="date">--%>
-<%--                <input type="date"/>--%>
-<%--            </div>--%>
+        <div class="dash-top">
+            <div class="date">
+                <input type="date"/>
+            </div>
 
-<%--            <button type="submit" onclick="showAddUserForm()" id="btn-addUser">--%>
-<%--                <span class="material-icons-sharp"> add </span>--%>
-<%--                <h3>Thêm Người Dùng</h3>--%>
-<%--            </button>--%>
-<%--        </div>--%>
+            <button type="submit" onclick="showAddUserForm()" id="btn-addUser">
+                <span class="material-icons-sharp"> add </span>
+                <h3>Thêm Người Dùng</h3>
+            </button>
+        </div>
 
-<%--        <section class="overlay-addUser">--%>
-<%--            <form id="add-user-form">--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addUserNameUser">Tên đăng nhập</label>--%>
-<%--                        <input type="text" id="addUserNameUser" name="userName" placeholder="Nhập tên đăng nhập."--%>
-<%--                               required>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addPassWordUser">Mật Khẩu</label>--%>
-<%--                        <input type="passWord" id="addPassWordUser" name="passWord" placeholder="Nhập mật khẩu."--%>
-<%--                               required>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addFirstNameUser">Họ</label>--%>
-<%--                        <input type="text" id="addFirstNameUser" name="firstName" placeholder="Nhập họ." required>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addLastNameUser">Tên</label>--%>
-<%--                        <input type="text" id="addLastNameUser" name="lastName" placeholder="Nhập tên." required>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addEmailUser">Email</label>--%>
-<%--                        <input type="email" id="addEmailUser" name="email" placeholder="Nhập email." required>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addAvatarUser">Avatar</label>--%>
-<%--                        <input type="text" id="addAvatarUser" name="avatar" placeholder="Nhập avatar." required>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="form-group">--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addAddressUser">Địa Chỉ</label>--%>
-<%--                        <input type="text" id="addAddressUser" name="address" placeholder="Nhập địa chỉ." required>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group--items">--%>
-<%--                        <label for="addPhoneUser">Số Điện Thoại</label>--%>
-<%--                        <input type="tel" id="addPhoneUser" name="phone" placeholder="Nhập số điện thoại." required>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                &lt;%&ndash;                <div class="form-group">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                    <div class="form-group--items">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                        <label for="addStatusUser">Trạng Thái</label>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                        <select id="addStatusUser" name="status" required>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                            <option type="number" value="0">Chưa kích hoạt</option>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                            <option type="number" value="1">Hoạt Động</option>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                            <option type="number" value="2">Bị khóa</option>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                            <option type="number" value="3">Bị cấm</option>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                            <option type="number" value="4">Đã xóa</option>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                        </select>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                    </div>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                </div>&ndash;%&gt;--%>
-<%--                <button type="submit" onclick="createUser(event)" class="btn-primary">--%>
-<%--                    <span class="material-icons-sharp"> add </span>--%>
-<%--                    <h3>Thêm Người Dùng</h3>--%>
-<%--                </button>--%>
-<%--            </form>--%>
-<%--        </section>--%>
+        <section class="overlay-addUser">
+            <form id="add-user-form">
+                <div class="form-group">
+                    <div class="form-group--items">
+                        <label for="addUserNameUser">Tên đăng nhập</label>
+                        <input type="text" id="addUserNameUser" name="userName" placeholder="Nhập tên đăng nhập."
+                               required>
+                    </div>
+                    <div class="form-group--items">
+                        <label for="addPassWordUser">Mật Khẩu</label>
+                        <input type="passWord" id="addPassWordUser" name="passWord" placeholder="Nhập mật khẩu."
+                               required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group--items">
+                        <label for="addFirstNameUser">Họ</label>
+                        <input type="text" id="addFirstNameUser" name="firstName" placeholder="Nhập họ." required>
+                    </div>
+                    <div class="form-group--items">
+                        <label for="addLastNameUser">Tên</label>
+                        <input type="text" id="addLastNameUser" name="lastName" placeholder="Nhập tên." required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group--items">
+                        <label for="addEmailUser">Email</label>
+                        <input type="email" id="addEmailUser" name="email" placeholder="Nhập email." required>
+                    </div>
+                    <div class="form-group--items">
+                        <label for="addAvatarUser">Avatar</label>
+                        <input type="text" id="addAvatarUser" name="avatar" placeholder="Nhập avatar." required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group--items">
+                        <label for="addAddressUser">Địa Chỉ</label>
+                        <input type="text" id="addAddressUser" name="address" placeholder="Nhập địa chỉ." required>
+                    </div>
+                    <div class="form-group--items">
+                        <label for="addPhoneUser">Số Điện Thoại</label>
+                        <input type="tel" id="addPhoneUser" name="phone" placeholder="Nhập số điện thoại." required>
+                    </div>
+                </div>
+                <%--                <div class="form-group">--%>
+                <%--                    <div class="form-group--items">--%>
+                <%--                        <label for="addStatusUser">Trạng Thái</label>--%>
+                <%--                        <select id="addStatusUser" name="status" required>--%>
+                <%--                            <option type="number" value="0">Chưa kích hoạt</option>--%>
+                <%--                            <option type="number" value="1">Hoạt Động</option>--%>
+                <%--                            <option type="number" value="2">Bị khóa</option>--%>
+                <%--                            <option type="number" value="3">Bị cấm</option>--%>
+                <%--                            <option type="number" value="4">Đã xóa</option>--%>
+                <%--                        </select>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+                <button type="submit" onclick="createUser(event)" class="btn-primary">
+                    <span class="material-icons-sharp"> add </span>
+                    <h3>Thêm Người Dùng</h3>
+                </button>
+            </form>
+        </section>
 
 
-<%--        <div class="recent-orders">--%>
-<%--            <h1 style="text-align: center;">Danh Sách Người Dùng</h1>--%>
-<%--            <table id="users--table">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>Id</th>--%>
-<%--                    <th>Tài khoản</th>--%>
-<%--                    <th>Họ</th>--%>
-<%--                    <th>Tên</th>--%>
-<%--                    <th>Email</th>--%>
-<%--                    <th>Avatar</th>--%>
-<%--                    <th>Địa chỉ</th>--%>
-<%--                    <th>SDT</th>--%>
-<%--                    <th>Ngày tạo</th>--%>
-<%--                    <th>Trạng thái</th>--%>
-<%--                    <th>Hành động</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <!-- Add tbody here | JS insertion -->--%>
-<%--            </table>--%>
-<%--            <a href="#">Show All</a>--%>
-<%--        </div>--%>
+        <div class="recent-orders">
+            <h1 style="text-align: center;">Danh Sách Người Dùng</h1>
+            <table id="users--table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tài khoản</th>
+                    <th>Họ</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Avatar</th>
+                    <th>Địa chỉ</th>
+                    <th>SDT</th>
+                    <th>Ngày tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <!-- Add tbody here | JS insertion -->
+            </table>
+            <a href="#">Show All</a>
+        </div>
 
-<%--        <!-- edit users -->--%>
-<%--        <div class="overlay">--%>
-<%--            <div class="recent-orders popup">--%>
-<%--                <span onclick="hideOverlay(event)" class="material-icons-sharp close"> close </span>--%>
-<%--                <h2>Chỉnh Sửa Người Dùng</h2>--%>
-<%--                <form id="user-edit-form">--%>
-<%--                    <table id="user_edit--table">--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th>Id</th>--%>
-<%--                            <th>Tài khoản</th>--%>
-<%--                            <th>Tên</th>--%>
-<%--                            <th>Họ</th>--%>
-<%--                            <th>Email</th>--%>
-<%--                            <th>Avatar</th>--%>
-<%--                            <th>Địa chỉ</th>--%>
-<%--                            <th>SDT</th>--%>
-<%--                            <th>Ngày tạo</th>--%>
-<%--                            <th>Trạng thái</th>--%>
-<%--                            <th>Hành động</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
+        <!-- edit users -->
+        <div class="overlay">
+            <div class="recent-orders popup">
+                <span onclick="hideOverlay(event)" class="material-icons-sharp close"> close </span>
+                <h2>Chỉnh Sửa Người Dùng</h2>
+                <form id="user-edit-form">
+                    <table id="user_edit--table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Tài khoản</th>
+                            <th>Tên</th>
+                            <th>Họ</th>
+                            <th>Email</th>
+                            <th>Avatar</th>
+                            <th>Địa chỉ</th>
+                            <th>SDT</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                        </thead>
 
-<%--                        <tbody>--%>
-<%--                        <!-- Các trường nhập sẽ được thêm vào ở đây qua JavaScript hoặc từ server -->--%>
-<%--                        <tr>--%>
-<%--                            <td><input type="number" name="id" id="edit-id" readonly></td>--%>
-<%--                            <td><input type="text" name="username" id="edit-username" readonly></td>--%>
-<%--                            <td><input type="text" name="lastName" id="edit-lastName" required></td>--%>
-<%--                            <td><input type="text" name="firstName" id="edit-firstName" required></td>--%>
-<%--                            <td><input type="text" name="email" id="edit-email" required></td>--%>
-<%--                            <td><input type="text" name="avatar" id="edit-avatar"></td>--%>
-<%--                            <td><input type="text" name="address" id="edit-address" required></td>--%>
-<%--                            <td><input type="number" name="phone" id="edit-phone" required></td>--%>
-<%--                            <td><input type="datetime-local" name="createdDate" id="edit-createdDate" readonly></td>--%>
-<%--                            <td>--%>
-<%--                                <select name="status" id="edit-status" required>--%>
-<%--                                    <option value="0">Chưa kích hoạt</option>--%>
-<%--                                    <option value="1">Hoạt Động</option>--%>
-<%--                                    <option value="2">Bị khoá</option>--%>
-<%--                                    <option value="3">Bị cấm</option>--%>
-<%--                                    <option value="4">Đã xóa</option>--%>
-<%--                                </select>--%>
-<%--                            </td>--%>
-<%--                            <td><span type="submit" onclick="saveUserEdits(event)" class="primary material-icons-sharp">save</span>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                        </tbody>--%>
-<%--                    </table>--%>
+                        <tbody>
+                        <!-- Các trường nhập sẽ được thêm vào ở đây qua JavaScript hoặc từ server -->
+                        <tr>
+                            <td><input type="number" name="id" id="edit-id" readonly></td>
+                            <td><input type="text" name="username" id="edit-username" readonly></td>
+                            <td><input type="text" name="lastName" id="edit-lastName" required></td>
+                            <td><input type="text" name="firstName" id="edit-firstName" required></td>
+                            <td><input type="text" name="email" id="edit-email" required></td>
+                            <td><input type="text" name="avatar" id="edit-avatar"></td>
+                            <td><input type="text" name="address" id="edit-address" required></td>
+                            <td><input type="number" name="phone" id="edit-phone" required></td>
+                            <td><input type="datetime-local" name="createdDate" id="edit-createdDate" readonly></td>
+                            <td>
+                                <select name="status" id="edit-status" required>
+                                    <option value="0">Chưa kích hoạt</option>
+                                    <option value="1">Hoạt Động</option>
+                                    <option value="2">Bị khoá</option>
+                                    <option value="3">Bị cấm</option>
+                                    <option value="4">Đã xóa</option>
+                                </select>
+                            </td>
+                            <td><span type="submit" onclick="saveUserEdits(event)" class="primary material-icons-sharp">save</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-<%--                </form>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+                </form>
+            </div>
+        </div>
 
-<%--        <!-- Popup vai trò và quyền của user -->--%>
-<%--        <div class="overlay overlay-userRolePermissons">--%>
-<%--            <div class="recent-orders popup popup-userRolePermissons"--%>
-<%--                 style="width: 700px;position: relative; transform: translate(62%, 40%);">--%>
-<%--                <span onclick="hideOverlayuserRolePermissons(event)" class="material-icons-sharp close"> close </span>--%>
-<%--                <h2>Quyền hạn người dùng</h2>--%>
-<%--                <form id="userRolePermissons-form">--%>
-<%--                    <table id="userRolePermissons--table">--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th style="width: 125px">Tài khoản</th>--%>
-<%--                            <th style="width: 125px">Tên</th>--%>
-<%--                            <th style="width: 150px; margin-right: 10px">Vai trò</th>--%>
-<%--                            <th>Thao tác</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
-<%--                        <tbody>--%>
-<%--                        <!-- Dữ liệu sẽ được chèn vào đây bằng JavaScript -->--%>
-<%--                        </tbody>--%>
-<%--                    </table>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <!-- Popup vai trò và quyền của user -->
+        <div class="overlay overlay-userRolePermissons">
+            <div class="recent-orders popup popup-userRolePermissons"
+                 style="width: 700px;position: relative; transform: translate(62%, 40%);">
+                <span onclick="hideOverlayuserRolePermissons(event)" class="material-icons-sharp close"> close </span>
+                <h2>Quyền hạn người dùng</h2>
+                <form id="userRolePermissons-form">
+                    <table id="userRolePermissons--table">
+                        <thead>
+                        <tr>
+                            <th style="width: 125px">Tài khoản</th>
+                            <th style="width: 125px">Tên</th>
+                            <th style="width: 150px; margin-right: 10px">Vai trò</th>
+                            <th>Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Dữ liệu sẽ được chèn vào đây bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
 
-<%--    </main>--%>
+    </main>
 
 
     <!--------------------------------------------------------
@@ -466,7 +466,7 @@
         </div>
 
         <section class="overlay-addProduct">
-<%--         13.1.1.2 Nhập thông tin rồi nhấn lưu--%>
+<%--        13.1.1.2 Admin nhập thông tin và nhấn Lưu .--%>
             <form id="add-product-form" onsubmit="createBook(event)">
                 <div class="form-group">
                     <div class="form-group--items">

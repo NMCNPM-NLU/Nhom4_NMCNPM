@@ -25,10 +25,12 @@ public class BookService {
 
     @Transactional
     public Books createBook(BookDto dto) {
+        // 13.1.1.7 BookService kiểm tra sách đã tồn tại chưa.
         if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
             throw new DuplicateBookException("BOOK_DUPLICATE", "Sách với tiêu đề và tác giả này đã tồn tại");
         }
-
+        // 13.1.1.8 Database bookstore trả về kết quả sách chưa tồn tại.
+        // 3.1.1.9 BookService khởi tạo sách, lưu danh mục và lưu sách.
         Books book = new Books();
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
@@ -47,6 +49,9 @@ public class BookService {
         book.getCategories().addAll(cats);
 
         Books saved = bookRepo.save(book);
+
+        // 13.1.1.10 Database bookstore trả về sách mới và ID.
+        // 13.1.1.11 BookService lưu sách vào transactions, và trả về đôi tượng đã lưu bao gồm Id mới sinh
         return saved;
     }
 }
