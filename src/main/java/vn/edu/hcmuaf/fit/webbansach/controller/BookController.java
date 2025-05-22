@@ -48,4 +48,5 @@ public class BookController {
             return ResponseEntity.badRequest().body(Map.of("Error", ex.getMessage()));
         }
     }
+
 }
