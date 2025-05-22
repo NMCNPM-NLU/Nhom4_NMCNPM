@@ -9,7 +9,7 @@ import java.util.Set;
 
 // Books.java
 @Entity
-@Table(name = "Books")
+@Table(name = "books")
 public class Books {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Books {
 
     @ManyToMany
     @JoinTable(
-            name = "Book_Categories",          // đúng DDL
+            name = "book_Categories",          // đúng DDL
             joinColumns = @JoinColumn(
                     name = "bookId",      // cột trong Book_Categories
                     referencedColumnName = "id"         // cột PK của Books
