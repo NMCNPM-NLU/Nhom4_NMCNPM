@@ -56,13 +56,16 @@ public class BookService {
         return bookRepo.save(savedBook);
     }
 
-
+    // 6.1.4: Hệ thống truy vấn cơ sở dữ liệu
+    // Gửi từ khóa tìm kiếm đến BookRepository để truy vấn sách
     public List<BookDto> searchBooks(String query) {
         if (query == null || query.trim().isEmpty()) {
             throw new IllegalArgumentException("Search query cannot be empty.");
         }
 
         List<Books> books = bookRepository.searchBooks(query);
+        // 6.1.5: Cơ sở dữ liệu trả về danh sách sách (List<Books>)
+        // Chuyển đổi danh sách Books thành danh sách BookDto để trả về cho Controller
         return books.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
