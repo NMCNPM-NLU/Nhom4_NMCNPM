@@ -44,28 +44,37 @@ function fetchProducts() {
 /*--------------------------------------------------------
 ---------------------------------------------------------
 
-                       Add Product
+                       Add Product (Thêm sách)
+
+ Mục đích:
+ - Hiển thị / ẩn form thêm sách
+ - Thu thập dữ liệu từ form
+ - Gửi dữ liệu lên server
+ - Hiển thị kết quả thêm sách hoặc lỗi
 
 ---------------------------------------------------------
 ----------------------------------------------------------*/
+
 // ===== Form Hiển thị / Ẩn =====
 const overlay = document.querySelector(".overlay-addProduct");
 const form = document.getElementById("add-product-form");
 
 // 13.1.1.0 Admin chọn “Thêm sách mới”
-// 13.1.1.1 Hiển thị form nhập thông tin
 function showAddProductForm() {
-    overlay.style.display = "flex";
+    // 13.1.1.1 Hiển thị form nhập thông tin
+    overlay.style.display = "flex"; // Mở form bằng cách hiển thị lớp overlay
 }
 
+// Ẩn form và reset dữ liệu
 function hideAddProductForm() {
     form.reset();
     overlay.style.display = "none";
 }
 
-// ===== Lấy dữ liệu từ form =====
+// 13.1.1.3 adminPage: JS thu thập dữ liệu từ form thành JSON object
 function getFormData() {
     const formData = new FormData(form);
+
     return {
         title: formData.get("title"),
         author: formData.get("author"),
@@ -81,13 +90,12 @@ function getFormData() {
     };
 }
 
-// 13.1.1.2 Nhập thông tin rồi nhấn lưu
+// 13.1.1.4 Gửi HTTP POST yêu cầu thêm sách
 async function createBook(event) {
     event.preventDefault();
     const data = getFormData();
 
     try {
-        // 13.1.1.3 Gửi HTTP POST đến request /WebBanSach/api/books
         const response = await fetch("/WebBanSach/api/books", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -95,14 +103,20 @@ async function createBook(event) {
         });
 
         if (!response.ok) {
+            // Xử lý lỗi trả về từ server:
+            // 13.1.2.7 adminPage hiển thị thông báo lỗi “VALIDATION_ERROR” từ server.
+            // 13.1.2.13 adminPage hiển thị thông báo lỗi “BOOK_DUPLICATE” từ server.
+            // 13.1.3.2 adminPage hiển thị thông báo lỗi chung "INTERNAL_ERROR" từ server.
             const errorMsg = await parseErrorResponse(response);
             throw new Error(errorMsg);
         }
 
-        const result = await response.json();
+        const result = await response.json(); // Lấy phản hồi thành công từ server
+
+        // 13.1.1.13 Hiển thị thông báo thêm sách thành công
         alert(`✅ Thêm sách thành công! ID = ${result.id}`);
-        form.reset();
-        hideAddProductForm();
+        form.reset(); // Reset form sau khi thêm thành công
+        hideAddProductForm(); // Đóng form lại
 
     } catch (err) {
         console.error("❌ Lỗi thêm sách:", err);
@@ -110,23 +124,35 @@ async function createBook(event) {
     }
 }
 
-// ===== Xử lý lỗi từ server =====
+// Phân tích phản hồi lỗi từ server (nếu có)
 async function parseErrorResponse(response) {
     try {
-        const errJson = await response.json();
-        return Object.entries(errJson)
-            .map(([field, msg]) => `• ${field}: ${msg}`)
-            .join("\n");
+        const body = await response.clone().json(); // Đọc body JSON từ response clone
+
+        if (body.validationErrors) {
+            // Trả về các lỗi từng trường input
+            return Object.entries(body.validationErrors)
+                .map(([field, msg]) => `• ${field}: ${msg}`)
+                .join("\n");
+        }
+
+        if (body.message) {
+            // Trả về lỗi chung
+            return body.message;
+        }
+
+        return `Lỗi ${response.status}`; // Mã lỗi HTTP (nếu không có gì khác)
     } catch {
-        const text = await response.text();
+        const text = await response.text(); // Trường hợp body không phải JSON
         return `Lỗi ${response.status}: ${text}`;
     }
 }
 
 // ===== DOM Ready =====
 document.addEventListener("DOMContentLoaded", () => {
-    hideAddProductForm();
+    hideAddProductForm(); // Ẩn form khi trang mới tải
 
+    // Ẩn form khi click ra ngoài vùng form
     document.addEventListener("click", (e) => {
         const clickOutside = !form.contains(e.target) && !e.target.closest("button");
         if (overlay.style.display === "flex" && clickOutside) {
@@ -134,4 +160,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
