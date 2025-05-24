@@ -96,7 +96,7 @@ async function createBook(event) {
     const data = getFormData();
 
     try {
-        const response = await fetch("/WebBanSach/api/books", {
+        const response = await fetch("/api/books", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
