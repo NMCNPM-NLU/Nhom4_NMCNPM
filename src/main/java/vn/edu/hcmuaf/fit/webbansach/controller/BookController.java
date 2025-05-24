@@ -30,7 +30,7 @@ public class BookController {
                 .body(Map.of("id", saved.getId()));
     }
 
-    // --- Exception Handlers ---
+    // 13.1.2.6 BookController trả về HTTP 400 cùng JSON type: "VALIDATION_ERROR", message: "Tương ứng được trả về trong Book"
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()
@@ -44,6 +44,7 @@ public class BookController {
         ));
     }
 
+    // 13.1.2.12 BookController trả về HTTP 400 cùng JSON type: "BOOK_DUPLICATE", message: "Sách với tiêu đề và tác giả này đã tồn tại"
     @ExceptionHandler(DuplicateBookException.class)
     public ResponseEntity<Map<String, String>> handleDuplicate(DuplicateBookException ex) {
         return ResponseEntity.badRequest().body(Map.of(
@@ -52,6 +53,7 @@ public class BookController {
         ));
     }
 
+    // 13.1.3.1 Nếu xảy ra lỗi bất ngờ thì BookController trả về HTTP 500 cùng JSON { type: "INTERNAL_ERROR", message: "Có lỗi trong server" }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleOther(Exception ex) {
         ex.printStackTrace(); // log để debug

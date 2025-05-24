@@ -466,7 +466,8 @@
         </div>
 
         <section class="overlay-addProduct">
-<%--        13.1.1.2 Admin nhập thông tin và nhấn Lưu .--%>
+            <%--13.1.1.2 Admin nhập thông tin và nhấn Lưu .--%>
+            <%--13.1.2.3 AdminPage hiển thị thông báo "Vui lòng nhập trường này" nếu không nhập thông tin mà nhấn lưu --%>
             <form id="add-product-form" onsubmit="createBook(event)">
                 <div class="form-group">
                     <div class="form-group--items">

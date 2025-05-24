@@ -27,6 +27,7 @@ public class BookService {
     public Books createBook(BookDto dto) {
         // 13.1.1.7 BookService kiểm tra sách đã tồn tại chưa.
         if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
+            // 13.1.2.11 BookService trả về lỗi sách đã tồn tại
             throw new DuplicateBookException("BOOK_DUPLICATE", "Sách với tiêu đề và tác giả này đã tồn tại");
         }
         // 13.1.1.8 Database bookstore trả về kết quả sách chưa tồn tại.
