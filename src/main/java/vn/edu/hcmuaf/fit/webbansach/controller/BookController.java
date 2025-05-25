@@ -65,6 +65,7 @@ public class BookController {
                 ));
     }
 
+    // 13.4.4. BookController gọi phương thức getAllProducts() từ BookService.
     @GetMapping("/admin")
     public List<Books> apiBooks() {
         return bookService.getAllProducts();

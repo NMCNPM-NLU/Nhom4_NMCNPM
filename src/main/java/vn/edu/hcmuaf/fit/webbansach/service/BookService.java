@@ -87,6 +87,7 @@ public class BookService {
         return dto;
     }
 
+    // 13.4.5. BookService gọi findAll() từ BookRepository để lấy danh sách sản phẩm từ cơ sở dữ liệu.
     public List<Books> getAllProducts() {
         return bookRepo.findAll();
     }
