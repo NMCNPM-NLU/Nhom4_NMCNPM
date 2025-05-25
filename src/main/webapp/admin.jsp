@@ -545,13 +545,15 @@
                     <th>Ngày xuất bản</th>
                     <th>Số lượng tồn</th>
                     <th>Giá (VNĐ)</th>
+                    <th>Ảnh</th>
+                    <th>Loại</th>
                     <th>Trạng thái</th>
                     <th style="width: 120px">Hành động</th>
                 </tr>
                 </thead>
                 <!-- Add tbody here | JS insertion -->
             </table>
-            <a href="#">Show All</a>
+<%--            <a href="#">Show All</a>--%>
         </div>
 
         <section class="overlay-addproductDetails">

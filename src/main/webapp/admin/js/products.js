@@ -10,7 +10,7 @@
 // Lấy danh sách sản phẩm từ server
 function fetchProducts() {
     $.ajax({
-        url: '/WebBanQuanAo/admin/manager-products', type: 'GET', dataType: 'json', success: function (products) {
+        url: '/api/books/admin', type: 'GET', dataType: 'json', success: function (products) {
             const table = $("#products--table");
 
             // Xóa DataTables nếu đã được khởi tạo trước đó
@@ -29,7 +29,7 @@ function fetchProducts() {
                 info: true, // Hiển thị thông tin tổng số bản ghi
                 order: [[0, 'asc']], // Sắp xếp mặc định theo cột đầu tiên (Id)
                 language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/vi.json' // Ngôn ngữ Tiếng Việt
+                    url: '/js/i18n/vi.json' // Ngôn ngữ Tiếng Việt
                 }, paging: true, // Kích hoạt phân trang
                 pageLength: 5, // Số bản ghi mỗi trang
                 lengthChange: true, // Kích hoạt thay đổi số lượng bản ghi mỗi trang
@@ -39,6 +39,44 @@ function fetchProducts() {
             alert("Không thể lấy danh sách sản phẩm. Vui lòng thử lại sau.");
         }
     });
+    console.log("✅ Đã khởi tạo lại DataTables thành công!");
+}
+
+function buildTableProduct(products) {
+    const tbody = $("<tbody></tbody>");
+    products.forEach(book => {
+        const row = $("<tr></tr>");
+        row.append($(`<td>${book.id}</td>`));
+        row.append($(`<td>${book.title}</td>`));
+        row.append($(`<td>${book.author}</td>`));
+        row.append($(`<td>${book.description}</td>`));
+        row.append($(`<td>${book.publishedDate}</td>`));
+        row.append($(`<td>${book.stockQty}</td>`));
+        row.append($(`<td>${book.price.toLocaleString('vi-VN')} đ</td>`));
+        row.append($(`<td><img src="${book.imageUrl}" width="60" height="90"/></td>`));
+
+        // categories là mảng hoặc danh sách -> join thành chuỗi
+        const categories = book.categories.map(cat => cat.name).join(", ");
+        row.append($(`<td>${categories}</td>`));
+
+        // Cột trạng thái
+        const statusText = book.stockQty > 0
+            ? '<span class="badge bg-success">Còn hàng</span>'
+            : '<span class="badge bg-secondary">Hết hàng</span>';
+        row.append($(`<td>${statusText}</td>`));
+
+        row.append($(`<td>
+                        <button class="action-btn btn-edit" title="Sửa">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="action-btn btn-delete" title="Xóa">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        </td>`));
+
+        tbody.append(row);
+    });
+    return tbody;
 }
 
 /*--------------------------------------------------------

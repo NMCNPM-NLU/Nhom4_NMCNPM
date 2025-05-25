@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.webbansach.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Categories {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     private List<Books> books;
 
     // Getters và setters

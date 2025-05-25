@@ -86,4 +86,8 @@ public class BookService {
                 .collect(Collectors.toList()));
         return dto;
     }
+
+    public List<Books> getAllProducts() {
+        return bookRepo.findAll();
+    }
 }
