@@ -106,7 +106,7 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="${book.imageUrl != null ? book.imageUrl : '/images/books/default.jpg'}" alt="${book.title}" class="product-item">
-                                                <button type="button" class="add-to-cart" data-product-id="${book.id}" data-product-tile="add-to-cart">Thêm vào Giỏ</button>
+
                                             </figure>
                                             <figcaption>
                                                 <h3><c:out value="${book.title}" /></h3>
