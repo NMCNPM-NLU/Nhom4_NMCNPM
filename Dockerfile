@@ -22,7 +22,7 @@ FROM tomcat:10.1.36-jdk21-temurin
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR từ builder stage sang thư mục webapps của Tomcat
-COPY --from=builder /app/target/WebBanSach.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Mở cổng 8080
 EXPOSE 8080
