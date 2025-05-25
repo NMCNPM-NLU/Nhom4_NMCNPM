@@ -10,6 +10,9 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/imgs/admin/favicon-32x32.png" type="image/png">
 
+    <%-- Font Awesome --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <!-- Frameworks -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
           integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
@@ -22,6 +25,34 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
+    <style>
+        .action-btn {
+            border: none;
+            padding: 8px;
+            margin: 2px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-edit {
+            background-color: #ffc107; /* Vàng */
+        }
+
+        .btn-edit:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Đỏ */
+        }
+
+        .btn-delete:hover {
+            background-color: #bd2130;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -30,7 +61,7 @@
         <div class="top">
             <div class="logo">
                 <!-- <img src="./assets/imgs/admin/logoadmin.jpg" alt="Logo" /> -->
-                <h2>LASMANATE</h2>
+                <h2>Admin</h2>
             </div>
             <div class="close" id="close-btn">
                 <span class="material-icons-sharp"> close </span>
@@ -46,10 +77,13 @@
                 <span class="material-icons-sharp"> person_outline </span>
                 <h3>Người dùng</h3>
             </a>
+
+            <%-- 13.4.1.Người dùng chọn nút chức năng "Quản lý sản phẩm" --%>
             <a href="admin/manager-products" onclick="showMain(event, 'admin/manager-products')">
                 <span class="material-icons-sharp"> inventory </span>
-                <h3>Sản phẩm</h3>
+                <h3>Quản lý sản phẩm</h3>
             </a>
+
             <a href="#">
                 <span class="material-icons-sharp"> settings </span>
                 <h3>Settings</h3>
@@ -544,13 +578,15 @@
                     <th>Ngày xuất bản</th>
                     <th>Số lượng tồn</th>
                     <th>Giá (VNĐ)</th>
+                    <th>Ảnh</th>
+                    <th>Loại</th>
                     <th>Trạng thái</th>
                     <th style="width: 120px">Hành động</th>
                 </tr>
                 </thead>
-                <!-- Add tbody here | JS insertion -->
+                <%--   Add tbody here   --%>
             </table>
-            <a href="#">Show All</a>
+<%--            <a href="#">Show All</a>--%>
         </div>
 
         <section class="overlay-addproductDetails">
@@ -694,9 +730,7 @@
     </main>
 </div>
 
-<%-- JS --%>
-<script src="admin/js/admin.js"></script>
-<script src="admin/js/products.js"></script>
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -705,6 +739,9 @@
 <!-- DataTables CSS -->
 <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
+<%-- JS --%>
+<script src="admin/js/admin.js"></script>
+<script src="admin/js/products.js"></script>
 
 </body>
 

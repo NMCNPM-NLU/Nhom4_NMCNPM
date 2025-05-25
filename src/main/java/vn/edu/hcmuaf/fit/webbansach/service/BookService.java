@@ -55,5 +55,11 @@ public class BookService {
         // 13.1.1.11 BookService lưu sách vào transactions, và trả về đôi tượng đã lưu bao gồm Id mới sinh
         return saved;
     }
+
+
+    public List<Books> getAllProducts() {
+        return bookRepo.findAll();
+    }
+
 }
 

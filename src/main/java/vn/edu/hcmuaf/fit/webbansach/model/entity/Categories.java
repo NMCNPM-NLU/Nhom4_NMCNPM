@@ -3,6 +3,8 @@ package vn.edu.hcmuaf.fit.webbansach.model.entity;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "categories")
@@ -18,6 +20,7 @@ public class Categories {
     private String description;
 
     @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     private Set<Books> books = new HashSet<>();
 
     // constructors, getters, setters
