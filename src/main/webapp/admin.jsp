@@ -10,6 +10,9 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/imgs/admin/favicon-32x32.png" type="image/png">
 
+    <%-- Font Awesome --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <!-- Frameworks -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
           integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
@@ -21,6 +24,35 @@
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+
+    <style>
+        .action-btn {
+            border: none;
+            padding: 8px;
+            margin: 2px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-edit {
+            background-color: #ffc107; /* Vàng */
+        }
+
+        .btn-edit:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Đỏ */
+        }
+
+        .btn-delete:hover {
+            background-color: #bd2130;
+        }
+
+    </style>
 
 </head>
 
