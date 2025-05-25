@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.webbansach.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.edu.hcmuaf.fit.webbansach.controller.DuplicateBookException;
 import vn.edu.hcmuaf.fit.webbansach.model.dto.BookDto;
 import vn.edu.hcmuaf.fit.webbansach.model.entity.Books;
 import vn.edu.hcmuaf.fit.webbansach.model.entity.Categories;
@@ -10,18 +11,29 @@ import vn.edu.hcmuaf.fit.webbansach.repository.BookRepository;
 import vn.edu.hcmuaf.fit.webbansach.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 // BookService.java
 @Service
 public class BookService {
-    @Autowired
-    private BookRepository bookRepo;
-    @Autowired private CategoryRepository categoryRepo;
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepo;
+    private final CategoryRepository categoryRepo;
+
+    public BookService(BookRepository bookRepo, CategoryRepository categoryRepo) {
+        this.bookRepo = bookRepo;
+        this.categoryRepo = categoryRepo;
+    }
+
     @Transactional
     public Books createBook(BookDto dto) {
+        // 13.1.1.7 BookService kiểm tra sách đã tồn tại chưa.
+        if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
+            // 13.1.2.11 BookService trả về lỗi sách đã tồn tại
+            throw new DuplicateBookException("BOOK_DUPLICATE", "Sách với tiêu đề và tác giả này đã tồn tại");
+        }
+        // 13.1.1.8 Database bookstore trả về kết quả sách chưa tồn tại.
+        // 3.1.1.9 BookService khởi tạo sách, lưu danh mục và lưu sách.
         Books book = new Books();
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
@@ -30,30 +42,20 @@ public class BookService {
         book.setStockQty(dto.getStockQty());
         book.setPublishedDate(dto.getPublishedDate());
         book.setImageUrl(
-                dto.getImageUrl() != null && !dto.getImageUrl().isBlank()
-                        ? dto.getImageUrl()
-                        : "/images/books/default.jpg"
+                Optional.ofNullable(dto.getImageUrl())
+                        .filter(u -> !u.isBlank())
+                        .orElse("/images/books/default.jpg")
         );
 
-        // 1. Kiểm tra sách đã tồn tại chưa
-        //13.1.1.7 Gọi existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())
-        if (bookRepo.existsByTitleAndAuthor(dto.getTitle(), dto.getAuthor())) {
-            //13.1.2.10 IllegalArgumentException:("Sách với tiêu đều này đã tồn tại")
-            throw new IllegalArgumentException("Sách với tiêu đề và tác giả này đã tồn tại");
-        }
-
-        // 1. Lưu sách trước để sinh id
-        Books savedBook = bookRepo.save(book);
-
-        // 2. Lấy category theo id
+        // gán categories
         List<Categories> cats = categoryRepo.findAllById(dto.getCategoryIds());
+        book.getCategories().addAll(cats);
 
-        // 3. Gán lại category
-        savedBook.getCategories().addAll(cats);
+        Books saved = bookRepo.save(book);
 
-        // 4. Lưu lại lần nữa để cập nhật mối quan hệ N-N
-        //13.1.1.8  Gọi JpaRepository bookRepo.save(savedBook)
-        return bookRepo.save(savedBook);
+        // 13.1.1.10 Database bookstore trả về sách mới và ID.
+        // 13.1.1.11 BookService lưu sách vào transactions, và trả về đôi tượng đã lưu bao gồm Id mới sinh
+        return saved;
     }
 
     // 6.1.4: Hệ thống truy vấn cơ sở dữ liệu
@@ -63,7 +65,8 @@ public class BookService {
             throw new IllegalArgumentException("Search query cannot be empty.");
         }
 
-        List<Books> books = bookRepository.searchBooks(query);
+
+        List<Books> books = bookRepo.searchBooks(query);
         // 6.1.5: Cơ sở dữ liệu trả về danh sách sách (List<Books>)
         // Chuyển đổi danh sách Books thành danh sách BookDto để trả về cho Controller
         return books.stream().map(this::convertToDto).collect(Collectors.toList());
