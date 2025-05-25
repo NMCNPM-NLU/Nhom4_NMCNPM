@@ -112,5 +112,3 @@ public class BookDto {
         this.categoryIds = categoryIds;
     }
 }
-
-

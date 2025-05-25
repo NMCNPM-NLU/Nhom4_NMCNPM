@@ -29,5 +29,3 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.enable();  // để cho DefaultServlet (container) phục vụ static khi Handler không bắt
     }
 }
-
-

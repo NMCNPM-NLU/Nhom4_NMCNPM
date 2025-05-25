@@ -456,8 +456,9 @@
                 <input type="date"/>
             </div>
             <div class="btn-containerAdd">
-<%--            13.1.1.0 Admin chọn button “Thêm sách mới”--%>
-<%--            13.1.1.1 Hiển thị form nhập thông tin--%>
+
+                <%--13.1.1.0 Admin chọn button “Thêm sách mới”--%>
+                <%--13.1.1.1 Hiển thị form nhập thông tin--%>
                 <button type="button" onclick="showAddProductForm()" id="btn-addProduct">
                     <span class="material-icons-sharp">add</span>
                     <h3>Thêm sản phẩm</h3>
