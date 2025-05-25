@@ -9,8 +9,11 @@
 //---------------Product Data--------------------//
 // Lấy danh sách sản phẩm từ server
 function fetchProducts() {
+    // 13.4.3. products.js gọi AJAX GET đến /api/books/admin
     $.ajax({
-        url: '/api/books/admin', type: 'GET', dataType: 'json', success: function (products) {
+        url: '/api/books/admin', type: 'GET', dataType: 'json',
+        // 13.4.7.1.5 AJAX callback success, lấy mảng products để hiển thị lên bảng.
+        success: function (products) {
             const table = $("#products--table");
 
             // Xóa DataTables nếu đã được khởi tạo trước đó
@@ -34,7 +37,9 @@ function fetchProducts() {
                 pageLength: 5, // Số bản ghi mỗi trang
                 lengthChange: true, // Kích hoạt thay đổi số lượng bản ghi mỗi trang
             });
-        }, error: function (xhr, status, error) {
+        },
+        // 13.4.7.2.6 AJAX nhận response lỗi (HTTP 500)
+        error: function (xhr, status, error) {
             console.error('Lỗi khi lấy danh sách sản phẩm:', error);
             alert("Không thể lấy danh sách sản phẩm. Vui lòng thử lại sau.");
         }

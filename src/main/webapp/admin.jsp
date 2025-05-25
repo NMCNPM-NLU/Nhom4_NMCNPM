@@ -78,6 +78,8 @@
                 <span class="material-icons-sharp"> person_outline </span>
                 <h3>Người dùng</h3>
             </a>
+
+            <%-- 13.4.1.Người dùng chọn nút chức năng "Quản lý sản phẩm". --%>
             <a href="admin/manager-products" onclick="showMain(event, 'admin/manager-products')">
                 <span class="material-icons-sharp"> inventory </span>
                 <h3>Sản phẩm</h3>
@@ -480,6 +482,7 @@
 
 ---------------------------------------------------------
 ---------------------------------------------------------->
+    <%--  13.4.2. admin.js hiển thị <main id="admin/manager-products"> --%>
     <main id="admin/manager-products">
         <h1>Quản lý sản phẩm</h1>
 
