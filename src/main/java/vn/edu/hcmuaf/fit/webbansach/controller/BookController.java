@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import vn.edu.hcmuaf.fit.webbansach.model.dto.BookDto;
 import vn.edu.hcmuaf.fit.webbansach.model.entity.Books;
 import vn.edu.hcmuaf.fit.webbansach.service.BookService;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -64,12 +62,6 @@ public class BookController {
                         "type", "INTERNAL_ERROR",
                         "message", ex.getMessage() != null ? ex.getMessage() : "Có lỗi trong server"
                 ));
-    }
-
-
-    @GetMapping("/admin")
-    public List<Books> apiBooks() {
-        return bookService.getAllProducts();
     }
 
 }

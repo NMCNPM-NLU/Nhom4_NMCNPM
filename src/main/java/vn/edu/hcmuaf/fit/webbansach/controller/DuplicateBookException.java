@@ -12,4 +12,3 @@ public class DuplicateBookException extends RuntimeException {
         return code;
     }
 }
-
